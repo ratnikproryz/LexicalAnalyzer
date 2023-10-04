@@ -1,4 +1,4 @@
-package regrex;
+package Regrex;
 
 import java.io.*;
 
@@ -18,7 +18,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            String path = "D:\\Java\\Compiler\\src\\regrex\\lexical.txt";
+            String path = "D:\\Java\\Compiler\\src\\Lexical\\lexical.txt";
             FileInputStream stream = new FileInputStream(path);
             BufferedReader br = new BufferedReader(new InputStreamReader(stream));
             LexicalAnalyzer lexicalAnalyzer = new LexicalAnalyzer();
