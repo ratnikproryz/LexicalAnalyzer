@@ -1,6 +1,4 @@
-package lexical;
-
-import lexical.LexicalAnalyzer;
+package regrex;
 
 import java.io.*;
 
@@ -9,24 +7,27 @@ import java.io.*;
 public class Main {
     public static String normalize(String str) {
         if (str.matches("^.*[(].*$")){
-            str = str.replaceAll("\\(", " \\( ");
+            str = str.replaceAll("\\(", " ( ");
         }
         if (str.matches("^.*[)].*$")){
-            str = str.replaceAll("\\)", " \\) ");
+            str = str.replaceAll("\\)", " ) ");
         }
+        str = str.replaceAll(";", "");
         return str.trim();
     }
 
     public static void main(String[] args) {
         try {
-            String path = "D:\\Java\\Compiler\\src\\lexical\\lexical.txt";
+            String path = "D:\\Java\\Compiler\\src\\regrex\\lexical.txt";
             FileInputStream stream = new FileInputStream(path);
             BufferedReader br = new BufferedReader(new InputStreamReader(stream));
             LexicalAnalyzer lexicalAnalyzer = new LexicalAnalyzer();
             String str = "";
 
             while ((str = br.readLine()) != null) {
-                lexicalAnalyzer.analyze(normalize(str));
+                str = normalize(str);
+                lexicalAnalyzer.analyze(str);
+                lexicalAnalyzer.analyzeV2(str);
             }
             lexicalAnalyzer.resutl();
         } catch (Exception e) {
