@@ -1,4 +1,4 @@
-package regrex;
+package Lexical;
 
 public interface Token {
     String empty = "^$";

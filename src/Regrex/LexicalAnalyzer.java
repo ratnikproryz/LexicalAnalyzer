@@ -1,18 +1,11 @@
-package regrex;
+package Regrex;
+
+import Lexical.Analyze;
+import Lexical.Token;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
-public class LexicalAnalyzer implements Token {
-    private final Set<String> keywordsList = new HashSet<>();
-    private final Set<String> identifiersList = new HashSet<>();
-    private final Set<String> numsList = new HashSet<>();
-    private final Set<String> addOpsList = new HashSet<>();
-    private final Set<String> mulOpsList = new HashSet<>();
-    private final Set<String> relOpsList = new HashSet<>();
-    private final Set<String> logicalOp = new HashSet<>();
-    private final Set<String> othersList = new HashSet<>();
+public class LexicalAnalyzer implements Token, Analyze {
 
     public LexicalAnalyzer() {
     }
@@ -72,7 +65,6 @@ public class LexicalAnalyzer implements Token {
             }
         }
     }
-
 
     public void resutl() {
         System.out.println("Keywords: " + keywordsList.toString());
