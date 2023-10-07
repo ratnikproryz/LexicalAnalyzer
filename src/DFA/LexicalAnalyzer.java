@@ -1,74 +1,45 @@
 package DFA;
 
 import Lexical.Analyze;
-import Lexical.Token;
 
+import java.io.BufferedReader;
 import java.util.Arrays;
 
 public class LexicalAnalyzer implements Token, Analyze {
+    private DFA dfa;
+
     public LexicalAnalyzer() {
     }
 
-    public void analyze(char c) {
-
+    public LexicalAnalyzer(DFA dfa) {
+        this.dfa = dfa;
     }
 
-    public void analyzeV2(char c) {
 
+    public void analyze(String str) {
+        for (char c : str.toCharArray()) {
+            if (dfa.getCurrentState() == 0 || dfa.getCurrentState() == 1) {
+                dfa.identifier(c);
+            }
+            if (Arrays.asList(numberState).contains(dfa.getCurrentState())) {
+                dfa.number(c);
+            }
+            if (dfa.getCurrentState() == 0 && (c == ';' || dfa.isBracket(c))) {
+                System.out.println(c + " : " + c);
+            }
+            if (dfa.getCurrentState() == 0 || dfa.getCurrentState() == 10) {
+                dfa.addOperator(c);
+            }
+
+            if (dfa.getCurrentState() == 0 || dfa.getCurrentState() == 26) {
+
+            }
+        }
+//        dfa.identifier(str);
     }
 
     public void result() {
 
     }
 
-    public int checkKeyword(char c) {
-        if (true) {
-
-            return 1;
-        }
-        return 0;
-    }
-
-    public int checkIdentifier(char c) {
-        if (true) {
-
-            return 2;
-        }
-        return 0;
-    }
-
-    public int checkNum(char c) {
-        if (true) {
-            return 3;
-        }
-        return 0;
-    }
-
-    public int checkAddOp(char c) {
-        if (true) {
-            return 4;
-        }
-        return 0;
-    }
-
-    public int checkMulOp(char c) {
-        if (true) {
-            return 5;
-        }
-        return 0;
-    }
-
-    public int checkRelop(char c) {
-        if (true) {
-            return 6;
-        }
-        return 0;
-    }
-
-    public int checkOthers(char c) {
-        if (true) {
-            return 7;
-        }
-        return 0;
-    }
 }
