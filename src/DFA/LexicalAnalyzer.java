@@ -18,6 +18,9 @@ public class LexicalAnalyzer implements Token, Analyze {
 
     public void analyze(String str) {
         for (char c : str.toCharArray()) {
+            if (dfa.getCurrentState() == 0 && c == ' ') {
+                dfa.reset();
+            }
             if (dfa.getCurrentState() == 0 || dfa.getCurrentState() == 1) {
                 dfa.identifier(c);
             }
@@ -30,16 +33,24 @@ public class LexicalAnalyzer implements Token, Analyze {
             if (dfa.getCurrentState() == 0 || dfa.getCurrentState() == 10) {
                 dfa.addOperator(c);
             }
-
-            if (dfa.getCurrentState() == 0 || dfa.getCurrentState() == 26) {
-
+            if (dfa.getCurrentState() == 0 || dfa.getCurrentState() == 28) {
+                dfa.mulOperator(c);
+            }
+            if (Arrays.asList(andState).contains(dfa.getCurrentState())) {
+                dfa.and(c);
+            }
+            if (Arrays.asList(orState).contains(dfa.getCurrentState())) {
+                dfa.or(c);
+            }
+            if (Arrays.asList(notState).contains(dfa.getCurrentState())) {
+                dfa.not(c);
+            }
+            if (Arrays.asList(relOpState).contains(dfa.getCurrentState())) {
+                dfa.relOperator(c);
+            }
+            if (dfa.getCurrentState() == 0) {
+                dfa.error(c);
             }
         }
-//        dfa.identifier(str);
     }
-
-    public void result() {
-
-    }
-
 }

@@ -73,44 +73,81 @@ public class DFA implements Token {
         if (currentState == 0 && (c == '+' || c == '-')) {
             currentState = 10;
             readed += c;
-        }
-        if (currentState == 10 && (isOther(c) || isSpace(c))) {
+        } else if (currentState == 10 && (isOther(c) || isSpace(c))) {
             System.out.println("Add operator: " + readed);
             reset();
         }
     }
 
-//    public void identifier(String str) {
-//        String word = "";
-//        for (char c : str.toCharArray()) {
-//            if (currentState == 0 && isLetter(c)) {
-//                currentState = 1;
-//                word += c;
-//                continue;
-//            }
-//            if (currentState == 1 && (isLetter(c) || isDigit(c))) {
-//                word += c;
-//                continue;
-//            }
-//
-//            if (currentState == 1 && (c == ';' || c == ' ' || isBracket(c))) {
-//                if (isKeyword(word)) {
-//                    System.out.println("Keyword: " + word);
-//                } else {
-//                    System.out.println("Identifier: " + word);
-//                }
-//                if (c != ' ') {
-//                    System.out.println(c + " : " + c);
-//                }
-//                word = "";
-//                reset();
-//                continue;
-//            }
-//            if (currentState == 0 && (c == ';' || isBracket(c))) {
-//                System.out.println(c + " : " + c);
-//            }
-//        }
-//    }
+    public void mulOperator(char c) {
+        if (currentState == 0 && (c == '*' || c == '/')) {
+            currentState = 28;
+            readed += c;
+        } else if (currentState == 28 && (isOther(c) || isSpace(c))) {
+            System.out.println("Mul operator: " + readed);
+            reset();
+        }
+    }
+
+    public void relOperator(char c) {
+        if (currentState == 0 && (c == '<' || c == '>')) {
+            currentState = 12;
+            readed += c;
+        } else if ((currentState == 12 || currentState == 15 || currentState == 17) && c == '=') {
+            currentState = 13;
+            readed += c;
+        } else if (currentState == 0 && c == '=') {
+            currentState = 17;
+            readed += c;
+        } else if (currentState == 17 && (isOther(c) || isSpace(c))) {
+            reset();
+        } else if ((currentState == 12 || currentState == 13) && (isOther(c) || isSpace(c))) {
+            System.out.println("Relative operator: " + readed);
+            reset();
+        }
+    }
+
+    public void not(char c) {
+        if (currentState == 0 && c == '!') {
+            currentState = 15;
+            readed += c;
+        } else if (currentState == 15 && (isOther(c) || isSpace(c))) {
+            System.out.println("NOT: " + readed);
+            reset();
+        }
+    }
+
+    public void and(char c) {
+        if (currentState == 0 && c == '&') {
+            currentState = 18;
+            readed += c;
+        } else if (currentState == 18 && c == '&') {
+            currentState = 19;
+            readed += c;
+        } else if (currentState == 19 && (isOther(c) || isSpace(c))) {
+            System.out.println("AND: " + readed);
+            reset();
+        }
+    }
+
+    public void or(char c) {
+        if (currentState == 0 && c == '|') {
+            currentState = 21;
+            readed += c;
+        } else if (currentState == 21 && c == '|') {
+            currentState = 22;
+            readed += c;
+        } else if (currentState == 22 && (isOther(c) || isSpace(c))) {
+            System.out.println("OR: " + readed);
+            reset();
+        }
+    }
+
+    public void error(char c) {
+        if (currentState == 0 && (c == '.')) {
+            System.out.println("Error: " + c);
+        }
+    }
 
     public boolean isSpace(char c) {
         return c == ' ';
