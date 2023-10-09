@@ -2,5 +2,8 @@
 Compiler Middle Test: Lexical Analyzer using DFA and Regex
 
 Contributor: Phạm Toàn Phúc
-## DFA Trasition Diagram
-<img src = "./src/lexical_dfa-Page-1.drawio.png">
+## Single DFA
+<img src="./src/lexical_dfa-Single%20DFA.drawio.png">
+
+## Combine DFA Diagram
+<img src = "./src/lexical_dfa-Combine%20DFA.drawio.png">
